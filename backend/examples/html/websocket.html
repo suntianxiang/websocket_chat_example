@@ -1,0 +1,61 @@
+<html>
+    <head>websocket test</head>
+    <style media="screen">
+      .message-box {
+        border: 1px solid #eaeaea;
+        padding: 15px;
+        min-height: 250px;
+      }
+    </style>
+    <body>
+        <button id="connect" type="button" name="button">connect server</button>
+        <button id="sendMsg" type="button" name="button">send hello message</button>
+        <button id="closeConnect" type="button" name="button">close connect</button>
+
+        <h5>received message</h5>
+        <div class="message-box">
+
+        </div>
+        <script>
+          var ws = null;
+
+          function writeToBox(content) {
+            let p = document.createElement('p');
+            p.innerHTML = content;
+            document.getElementsByClassName('message-box')[0].appendChild(p);
+          }
+
+          document.getElementById('connect').addEventListener('click', function () {
+            if (ws) {
+              ws.close();
+            }
+            ws = new WebSocket("ws://127.0.0.1:8080");
+            ws.onopen = function (e) {
+              writeToBox('client: websocket opened.');
+            };
+
+            ws.onmessage = function (e) {
+              writeToBox('server: ' + e.data);
+            };
+
+            ws.onclose = function (e) {
+              writeToBox('client: connect closed ...');
+            };
+          });
+
+          document.getElementById('sendMsg').addEventListener('click', function () {
+            if (null === ws || ws.readyState !== 1) {
+              return alert('websocket not connecting ...');
+            }
+
+            ws.send('hello');
+          });
+
+          document.getElementById('closeConnect').addEventListener('click', function () {
+            if (null !== ws) {
+              ws.close();
+            }
+          });
+        </script>
+    </body>
+</html>

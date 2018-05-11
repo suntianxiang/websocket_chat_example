@@ -1,0 +1,14 @@
+{
+    "require": {
+        "react/event-loop": "^0.5.2",
+        "react/stream": "^0.7.7",
+        "react/socket": "^0.8.11",
+        "zendframework/zend-diactoros": "^1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "Support\\": "src"
+        }
+    }
+}

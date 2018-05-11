@@ -1,0 +1,12 @@
+.nr-box {
+
+}
+
+.nr-box .change {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.nr-box .b-enter {
+    margin-top: 10px;
+}
